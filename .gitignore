@@ -12,3 +12,7 @@ __pycache__/
 dist/
 build/
 .next/
+
+# scripts/verify.sh works here rather than in an absolute mktemp path, so that no path
+# from this machine can reach the output it pastes into the README.
+.verify-tmp/
