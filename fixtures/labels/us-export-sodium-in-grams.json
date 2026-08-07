@@ -1,0 +1,24 @@
+{
+  "name": "US panel with sodium transcribed in grams",
+  "format": "US_2016",
+  "provenance": "constructed",
+  "source_note": "Negative control for the unit handling, and the only fixture that declares a nutrient in a unit other than the one its rounding rule is written in. Export packaging routinely prints sodium in grams alongside a US-shaped per-serving panel, and a hand transcription of one lands here. The tool has to convert 0.16 g into 160 mg BEFORE inverting, because inverting first would apply the gram-sized rule to a milligram figure and put the answer out by a factor of a thousand. Every other row is internally consistent, so this label must raise no flag.",
+  "declared_basis": "per_serving",
+  "serving": {"household": "1 bar", "amount": 30, "unit": "g"},
+  "servings_per_container": 10,
+  "net_quantity": {"amount": 300, "unit": "g"},
+  "nutrients": {
+    "energy_kcal": 130,
+    "fat": 2,
+    "saturated_fat": 0.5,
+    "trans_fat": 0,
+    "cholesterol": 0,
+    "sodium": {"value": 0.16, "unit": "g"},
+    "carbohydrate": 25,
+    "fiber": 3,
+    "total_sugars": 6,
+    "added_sugars": 4,
+    "protein": 3,
+    "potassium": {"value": 210, "unit": "mg"}
+  }
+}

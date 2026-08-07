@@ -351,10 +351,58 @@ def declared_text(raw) -> str:
     return _text(Fraction(str(raw)))
 
 
-def declared_unit(raw, default: str) -> str:
+def declared_unit(raw) -> str:
     if isinstance(raw, dict) and raw.get("unit"):
-        return str(raw["unit"])
-    return default
+        return str(raw["unit"]).strip().lower()
+    return ""
+
+
+# The unit each rounding rule is written in, and the conversion factors between units of
+# the same dimension. Both typed out again here rather than imported. A panel printing
+# sodium in grams has to be converted into milligrams before its interval is taken, or a
+# gram-sized rounding step lands on a milligram figure and the answer is out by a
+# thousand.
+RULE_UNIT = {
+    "US_2016": {
+        "energy_kcal": "kcal", "cholesterol": "mg", "sodium": "mg",
+        "fat": "g", "saturated_fat": "g", "trans_fat": "g",
+        "monounsaturated_fat": "g", "polyunsaturated_fat": "g",
+        "carbohydrate": "g", "fiber": "g", "total_sugars": "g",
+        "added_sugars": "g", "sugar_alcohol": "g", "protein": "g",
+    },
+    "EU_1169": {
+        "energy_kj": "kj", "energy_kcal": "kcal", "salt": "g",
+        "fat": "g", "saturated_fat": "g", "monounsaturated_fat": "g",
+        "polyunsaturated_fat": "g", "carbohydrate": "g", "total_sugars": "g",
+        "polyols": "g", "starch": "g", "fiber": "g", "protein": "g",
+    },
+}
+
+UNIT_ALIAS = {"gram": "g", "grams": "g", "gm": "g", "milligram": "mg", "milligrams": "mg",
+              "microgram": "mcg", "micrograms": "mcg", "ug": "mcg", "µg": "mcg",
+              "μg": "mcg", "calories": "kcal", "calorie": "kcal", "l": "l",
+              "litre": "l", "liter": "l", "kj": "kj", "kcal": "kcal"}
+
+# Grams per unit, and millilitres per unit. Two separate tables so a mass can never be
+# converted into a volume by accident.
+PER_GRAM = {"kg": Fraction(1000), "g": Fraction(1), "mg": Fraction(1, 1000),
+            "mcg": Fraction(1, 1000000)}
+PER_ML = {"l": Fraction(1000), "ml": Fraction(1)}
+
+
+def canonical_unit(text: str) -> str:
+    return UNIT_ALIAS.get(text.strip().lower(), text.strip().lower())
+
+
+def unit_factor(source: str, target: str) -> Fraction:
+    """How many ``target`` units one ``source`` unit is. Raises across dimensions."""
+    source, target = canonical_unit(source), canonical_unit(target)
+    if source == target:
+        return Fraction(1)
+    for table in (PER_GRAM, PER_ML):
+        if source in table and target in table:
+            return table[source] / table[target]
+    raise ValueError(f"cannot convert {source} to {target}")
 
 
 def nutrient_interval(fmt: str, key: str, raw) -> tuple[Fraction, Fraction]:
@@ -368,6 +416,15 @@ def nutrient_interval(fmt: str, key: str, raw) -> tuple[Fraction, Fraction]:
     printed figure itself rules out.
     """
     text = declared_text(raw)
+    printed_unit = declared_unit(raw)
+    rule_unit = RULE_UNIT.get(fmt, {}).get(key)
+    if printed_unit and rule_unit and canonical_unit(printed_unit) != rule_unit:
+        # Convert the printed figure into the unit the rule is written in, then invert.
+        # Inverting first would apply the wrong rounding step, which is a factor of a
+        # thousand for a mass.
+        prefix = "<" if text.startswith("<") else ""
+        converted = Fraction(text.lstrip("<")) * unit_factor(printed_unit, rule_unit)
+        text = prefix + _text(converted)
     magnitude = Fraction(text.lstrip("<") or "0")
     ceiling = max(magnitude * 4, Fraction(20))
     forms = us_forms if fmt == "US_2016" else eu_forms
@@ -809,10 +866,25 @@ def prove_independence() -> list[str]:
 # --------------------------------------------------------------------------- main
 
 
+# --quick is what the sabotage harness runs, twenty nine times. The subset is named
+# rather than sliced so that it spans the things the corpus is there to exercise: a US
+# per-serving panel, an EU per-100 panel, a label whose units need converting, and a
+# label that is supposed to be flagged. The Atwater verdicts and the flag sets below run
+# over the whole corpus either way; only the endpoint-by-endpoint sweep is narrowed.
+QUICK_LABELS = {
+    "cereal-a-flakes",
+    "eu-dark-chocolate",
+    "us-export-sodium-in-grams",
+    "broken-mass-budget",
+}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--quick", action="store_true",
-                        help="normalisation on three fixtures rather than all of them")
+                        help="sweep endpoints on four representative fixtures rather "
+                             "than all of them; the flag sets and energy verdicts still "
+                             "cover the whole corpus")
     args = parser.parse_args()
 
     report = Report()
@@ -829,7 +901,14 @@ def main() -> int:
     print("rounding inverses recomputed by bisection on a separately written forward rule")
     flags_expected = read_fixture("fixtures/expected/flags.json")["expected"]
     labels = sorted(p.name[:-5] for p in (ROOT / "fixtures" / "labels").glob("*.json"))
-    subset = labels[:3] if args.quick else labels
+    subset = [stem for stem in labels if stem in QUICK_LABELS] if args.quick else labels
+    if args.quick and len(subset) < len(QUICK_LABELS):
+        # An alphabetical slice would have been the easy way to build this subset, and it
+        # would have silently dropped the export fixture off the end. Naming the labels
+        # means a renamed or deleted one is a failure rather than a quieter run.
+        missing = sorted(QUICK_LABELS - set(subset))
+        print(f"  FAIL  --quick names labels that are not in the corpus: {missing}")
+        return 1
     for stem in subset:
         check_normalisation(report, f"fixtures/labels/{stem}.json")
     print(f"  ok    {report.checked} interval endpoints recomputed across {len(subset)} labels")

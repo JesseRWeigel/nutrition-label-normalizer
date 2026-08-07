@@ -46,6 +46,43 @@ class TestUnits(unittest.TestCase):
             convert(1, "handfuls", "g")
 
 
+class TestUnitConversionBeforeInversion(unittest.TestCase):
+    """A figure printed in one unit, inverted through a rule written in another.
+
+    The conversion has to happen BEFORE the rounding inverse. A sodium row printed as
+    0.16 g is 160 mg, and 160 mg sits above the 140 mg boundary where the step becomes
+    10 mg, so the interval is [155, 165). Inverting 0.16 first would run a gram figure
+    through milligram-sized segments and put the answer out by a factor of a thousand.
+
+    Written because a sabotage that disabled the conversion changed nothing anywhere in
+    this suite: no fixture declared a nutrient in a unit other than its rule's until
+    us-export-sodium-in-grams was added alongside this test.
+    """
+
+    def setUp(self):
+        self.label = Label.load(FIXTURES / "labels" / "us-export-sodium-in-grams.json")
+
+    def test_sodium_in_grams_becomes_milligrams_before_the_inverse(self):
+        sodium = self.label.nutrients["sodium"]
+        self.assertEqual(sodium.unit, "mg")
+        self.assertEqual(sodium.declaration.amount, Fraction(160))
+        self.assertEqual(sodium.interval.lo, Fraction(155))
+        self.assertEqual(sodium.interval.hi, Fraction(165))
+
+    def test_the_ten_milligram_step_applies_not_the_five(self):
+        # 160 mg is above the 140 mg boundary, so the interval is 10 mg wide and not 5.
+        # This is the assertion that fails if the conversion happens after the inverse,
+        # because 0.16 is nowhere near any boundary in the rule table.
+        self.assertEqual(self.label.nutrients["sodium"].interval.width, Fraction(10))
+
+    def test_a_row_already_in_the_rule_unit_is_untouched(self):
+        # The negative control for the conversion: potassium is declared in mg, has no
+        # entry in the US rounding table, and must come through unconverted at 210 mg.
+        potassium = self.label.nutrients["potassium"]
+        self.assertEqual(potassium.unit, "mg")
+        self.assertEqual(potassium.declaration.amount, Fraction(210))
+
+
 class TestOcrConfidenceGate(unittest.TestCase):
     def test_a_clean_panel_reads_completely(self):
         read = read_tsv(FIXTURES / "ocr" / "clean-panel.tsv")
