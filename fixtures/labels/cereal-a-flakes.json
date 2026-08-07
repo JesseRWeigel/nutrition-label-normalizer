@@ -1,0 +1,24 @@
+{
+  "name": "Cereal A, flakes",
+  "format": "US_2016",
+  "provenance": "typical",
+  "source_note": "Values representative of a US breakfast flake cereal, not transcribed from a specific package. Paired with cereal-b-granola to show what a serving-size difference does to a per-serving comparison.",
+  "declared_basis": "per_serving",
+  "serving": {"household": "1 cup", "amount": 34, "unit": "g"},
+  "servings_per_container": 13,
+  "net_quantity": {"amount": 440, "unit": "g"},
+  "nutrients": {
+    "energy_kcal": 140,
+    "fat": 2,
+    "saturated_fat": 0.5,
+    "trans_fat": 0,
+    "cholesterol": 0,
+    "sodium": 140,
+    "carbohydrate": 28,
+    "fiber": 3,
+    "total_sugars": 9,
+    "added_sugars": 8,
+    "protein": 3,
+    "potassium": 120
+  }
+}

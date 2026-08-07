@@ -1,0 +1,26 @@
+{
+  "name": "EU plain yoghurt",
+  "format": "EU_1169",
+  "provenance": "typical",
+  "source_note": "Representative values for an EU whole milk plain yoghurt, declared per 100 g. Its salt figure of 0.12 g is the EU convention; the equivalent US panel would print 48 mg of sodium. The two energy figures were recomputed from the Annex XIV factors so that the fixture is a compliant label rather than an approximate one.",
+  "declared_basis": "per_100g",
+  "serving": {
+    "household": "1 pot",
+    "amount": 125,
+    "unit": "g"
+  },
+  "net_quantity": {
+    "amount": 500,
+    "unit": "g"
+  },
+  "nutrients": {
+    "energy_kj": 262,
+    "energy_kcal": 63,
+    "fat": 3.3,
+    "saturated_fat": 2.1,
+    "carbohydrate": 4.7,
+    "total_sugars": 4.7,
+    "protein": 3.5,
+    "salt": 0.12
+  }
+}

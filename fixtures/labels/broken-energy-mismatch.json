@@ -1,0 +1,22 @@
+{
+  "name": "BROKEN: calories contradict the macronutrients",
+  "format": "US_2016",
+  "provenance": "constructed",
+  "source_note": "Positive control. The macronutrient rows imply roughly 190 kcal and the panel declares 100. No assignment of true values consistent with the printed rows produces the printed energy, so the energy check must flag this one.",
+  "declared_basis": "per_serving",
+  "serving": {"household": "1 bar", "amount": 40, "unit": "g"},
+  "servings_per_container": 6,
+  "nutrients": {
+    "energy_kcal": 100,
+    "fat": 10,
+    "saturated_fat": 2,
+    "trans_fat": 0,
+    "cholesterol": 0,
+    "sodium": 100,
+    "carbohydrate": 20,
+    "fiber": 0,
+    "total_sugars": 5,
+    "added_sugars": 0,
+    "protein": 5
+  }
+}

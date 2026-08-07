@@ -1,0 +1,23 @@
+{
+  "name": "US panel printed before the 2016 rule",
+  "format": "US_2016",
+  "provenance": "constructed",
+  "source_note": "Negative control for the format-era note. Declares vitamin A and vitamin C and none of added sugars, potassium or vitamin D, which is the shape of a pre-2016 panel. The tool must say so as a note and must not treat it as an error.",
+  "declared_basis": "per_serving",
+  "serving": {"household": "3/4 cup", "amount": 30, "unit": "g"},
+  "servings_per_container": 14,
+  "nutrients": {
+    "energy_kcal": 110,
+    "fat": 1,
+    "saturated_fat": 0,
+    "trans_fat": 0,
+    "cholesterol": 0,
+    "sodium": 190,
+    "carbohydrate": 25,
+    "fiber": 3,
+    "total_sugars": 1,
+    "protein": 3,
+    "vitamin_a": 500,
+    "vitamin_c": 6
+  }
+}

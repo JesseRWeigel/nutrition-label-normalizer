@@ -1,0 +1,21 @@
+{
+  "name": "BROKEN: saturated fat exceeds total fat",
+  "format": "US_2016",
+  "provenance": "constructed",
+  "source_note": "Positive control. Saturated fat is declared at 7 g inside a total fat of 5 g. The energy row was chosen to agree with the total fat figure so that the energy check stays quiet and the component check has to do the work.",
+  "declared_basis": "per_serving",
+  "serving": {"household": "1 piece", "amount": 30, "unit": "g"},
+  "servings_per_container": 10,
+  "nutrients": {
+    "energy_kcal": 90,
+    "fat": 5,
+    "saturated_fat": 7,
+    "trans_fat": 0,
+    "cholesterol": 0,
+    "sodium": 60,
+    "carbohydrate": 10,
+    "total_sugars": 2,
+    "added_sugars": 0,
+    "protein": 2
+  }
+}

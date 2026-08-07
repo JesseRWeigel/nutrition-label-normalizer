@@ -1,0 +1,26 @@
+{
+  "name": "BROKEN: salt and sodium disagree by the 2.5 factor",
+  "format": "EU_1169",
+  "provenance": "constructed",
+  "source_note": "Positive control for the salt conversion. The panel declares 120 mg of sodium and 0.12 g of salt, which is the same number twice. Annex I point 11 makes the salt equivalent 0.30 g. This is the error a manufacturer makes by relabelling a US panel for the EU market without applying the factor.",
+  "declared_basis": "per_100g",
+  "serving": {
+    "household": "1 pot",
+    "amount": 125,
+    "unit": "g"
+  },
+  "nutrients": {
+    "energy_kj": 262,
+    "energy_kcal": 63,
+    "fat": 3.3,
+    "saturated_fat": 2.1,
+    "carbohydrate": 4.7,
+    "total_sugars": 4.7,
+    "protein": 3.5,
+    "salt": 0.12,
+    "sodium": {
+      "value": 120,
+      "unit": "mg"
+    }
+  }
+}

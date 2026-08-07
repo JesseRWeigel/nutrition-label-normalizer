@@ -1,0 +1,23 @@
+{
+  "name": "US crackers, 2.5 servings",
+  "format": "US_2016",
+  "provenance": "constructed",
+  "source_note": "Built to exercise two things at once: a fractional servings-per-container count, and a declared 0 g of trans fat on a product that is plausibly just under the 0.5 g threshold. Per container, that 0 g becomes an interval reaching well past a gram.",
+  "declared_basis": "per_serving",
+  "serving": {"household": "16 crackers", "amount": 28, "unit": "g"},
+  "servings_per_container": 2.5,
+  "net_quantity": {"amount": 70, "unit": "g"},
+  "nutrients": {
+    "energy_kcal": 150,
+    "fat": 9,
+    "saturated_fat": 4.5,
+    "trans_fat": 0,
+    "cholesterol": 5,
+    "sodium": 220,
+    "carbohydrate": 15,
+    "fiber": 1,
+    "total_sugars": 1,
+    "added_sugars": 0,
+    "protein": 2
+  }
+}

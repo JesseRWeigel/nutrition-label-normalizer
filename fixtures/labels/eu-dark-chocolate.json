@@ -1,0 +1,27 @@
+{
+  "name": "EU dark chocolate 70 percent",
+  "format": "EU_1169",
+  "provenance": "typical",
+  "source_note": "Representative values for an EU 70 percent dark chocolate, declared per 100 g. Included because it declares fibre, which the EU counts at 2 kcal per gram and the US may exclude from carbohydrate entirely. The two energy figures were recomputed from the Annex XIV factors so that the fixture is a compliant label rather than an approximate one.",
+  "declared_basis": "per_100g",
+  "serving": {
+    "household": "4 squares",
+    "amount": 25,
+    "unit": "g"
+  },
+  "net_quantity": {
+    "amount": 100,
+    "unit": "g"
+  },
+  "nutrients": {
+    "energy_kj": 2362,
+    "energy_kcal": 570,
+    "fat": 42.5,
+    "saturated_fat": 25.9,
+    "carbohydrate": 33.5,
+    "total_sugars": 28.9,
+    "fiber": 10.9,
+    "protein": 7.8,
+    "salt": 0.02
+  }
+}

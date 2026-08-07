@@ -1,0 +1,22 @@
+{
+  "name": "BROKEN: added sugars exceed total sugars",
+  "format": "US_2016",
+  "provenance": "constructed",
+  "source_note": "Positive control. Added sugars are a subset of total sugars by definition, and this panel declares 8 g added inside 3 g total.",
+  "declared_basis": "per_serving",
+  "serving": {"household": "1 pouch", "amount": 40, "unit": "g"},
+  "servings_per_container": 5,
+  "nutrients": {
+    "energy_kcal": 120,
+    "fat": 3,
+    "saturated_fat": 1,
+    "trans_fat": 0,
+    "cholesterol": 0,
+    "sodium": 80,
+    "carbohydrate": 20,
+    "fiber": 1,
+    "total_sugars": 3,
+    "added_sugars": 8,
+    "protein": 4
+  }
+}

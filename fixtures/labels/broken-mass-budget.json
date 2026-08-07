@@ -1,0 +1,22 @@
+{
+  "name": "BROKEN: macronutrients outweigh the serving",
+  "format": "US_2016",
+  "provenance": "constructed",
+  "source_note": "Positive control for a transposed serving size. Fat, carbohydrate and protein total 38 g inside a declared 30 g serving, which is more food than the serving contains. The energy row is consistent with the macronutrients, so only the mass budget check can catch this.",
+  "declared_basis": "per_serving",
+  "serving": {"household": "1 scoop", "amount": 30, "unit": "g"},
+  "servings_per_container": 20,
+  "nutrients": {
+    "energy_kcal": 210,
+    "fat": 12,
+    "saturated_fat": 3,
+    "trans_fat": 0,
+    "cholesterol": 0,
+    "sodium": 50,
+    "carbohydrate": 20,
+    "fiber": 1,
+    "total_sugars": 10,
+    "added_sugars": 5,
+    "protein": 6
+  }
+}

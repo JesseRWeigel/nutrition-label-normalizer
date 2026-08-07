@@ -1,0 +1,75 @@
+{
+  "_comment": "Hand-computed normalisations. Each entry was worked out on paper from the printed figures and the rounding rules, then written here as exact rationals. They are not a snapshot of the tool's output; if the tool disagrees with one of these, one of the two is wrong and the test says which. The upper bound is exclusive throughout.",
+  "cases": [
+    {
+      "fixture": "fda-sample-panel", "basis": "per_100g", "nutrient": "fat",
+      "lo": "500/37", "hi": "1700/109",
+      "why": "8 g of fat prints from [7.5, 8.5). A 55 g serving prints from [54.5, 55.5). Dividing the smallest fat by the largest serving gives 100 * 7.5 / 55.5 = 500/37, and the largest fat by the smallest serving gives 100 * 8.5 / 54.5 = 1700/109. The endpoints swap, which is the whole reason interval division is not two divisions."
+    },
+    {
+      "fixture": "fda-sample-panel", "basis": "per_100g", "nutrient": "energy_kcal",
+      "lo": "15000/37", "hi": "47000/109",
+      "why": "230 kcal prints from [225, 235). 100 * 225 / 55.5 = 15000/37 and 100 * 235 / 54.5 = 47000/109. That is a 26 kcal spread on a figure most people would read as a single number."
+    },
+    {
+      "fixture": "fda-sample-panel", "basis": "per_container", "nutrient": "sodium",
+      "lo": "2325/2", "hi": "2805/2",
+      "why": "160 mg prints from [155, 165). Eight servings prints from [7.5, 8.5) because servings above 5 go to the nearest whole. 155 * 7.5 = 1162.5 and 165 * 8.5 = 1402.5. Two roundings multiplied together give a 240 mg spread, which is a tenth of the daily value."
+    },
+    {
+      "fixture": "fda-sample-panel", "basis": "per_100kcal", "nutrient": "added_sugars",
+      "lo": "190/47", "hi": "14/3",
+      "why": "10 g of added sugars prints from [9.5, 10.5) and 230 kcal from [225, 235). 100 * 9.5 / 235 = 190/47 and 100 * 10.5 / 225 = 14/3."
+    },
+    {
+      "fixture": "us-crackers-2point5-servings", "basis": "per_container", "nutrient": "trans_fat",
+      "lo": "0", "hi": "11/8",
+      "why": "the headline case. 0 g of trans fat prints from [0, 0.5). A declared 2.5 servings prints from [2.25, 2.75) because counts between 2 and 5 go to the nearest half. 0.5 * 2.75 = 1.375 g, so a package labelled zero trans fat throughout can hold nearly a gram and a half of it."
+    },
+    {
+      "fixture": "us-crackers-2point5-servings", "basis": "per_serving", "nutrient": "cholesterol",
+      "lo": "5", "hi": "15/2",
+      "why": "asymmetric because the 2 to 5 mg band is reserved for the less-than-5 form, so a printed 5 mg cannot have come from 4.9 mg"
+    },
+    {
+      "fixture": "cereal-a-flakes", "basis": "per_serving", "nutrient": "energy_kcal",
+      "lo": "135", "hi": "145",
+      "why": "declared per serving already, so no conversion applies and the interval is the bare rounding interval of 140 kcal above the 50 kcal breakpoint"
+    },
+    {
+      "fixture": "cereal-a-flakes", "basis": "per_100g", "nutrient": "energy_kcal",
+      "lo": "9000/23", "hi": "29000/67",
+      "why": "100 * 135 / 34.5 = 9000/23 and 100 * 145 / 33.5 = 29000/67. Against cereal B's [15000/37, 47000/109) the two intervals overlap almost completely, while the per-serving figures differ by about 60 percent."
+    },
+    {
+      "fixture": "us-peanut-butter", "basis": "per_100g", "nutrient": "sodium",
+      "lo": "5500/13", "hi": "29000/63",
+      "why": "140 mg sits on the boundary where the step changes from 5 mg to 10 mg, so it prints from [137.5, 145). A 32 g serving prints from [31.5, 32.5). 100 * 137.5 / 32.5 = 5500/13 and 100 * 145 / 31.5 = 29000/63."
+    },
+    {
+      "fixture": "us-peanut-butter", "basis": "per_100kcal", "nutrient": "protein",
+      "lo": "10/3", "hi": "150/37",
+      "why": "7 g of protein prints from [6.5, 7.5) and 190 kcal from [185, 195). 100 * 6.5 / 195 = 10/3 and 100 * 7.5 / 185 = 150/37."
+    },
+    {
+      "fixture": "us-whole-milk", "basis": "per_100g", "nutrient": "energy_kcal",
+      "lo": "29000/481", "hi": "31000/479",
+      "why": "a liquid, so the basis reads per 100 ml. 150 kcal prints from [145, 155) and a 240 ml serving from [239.5, 240.5). 100 * 145 / 240.5 = 29000/481 and 100 * 155 / 239.5 = 31000/479."
+    },
+    {
+      "fixture": "eu-olive-oil", "basis": "per_100g", "nutrient": "fat",
+      "lo": "1831/20", "hi": "1833/20",
+      "why": "declared per 100 ml already, so no conversion applies. 91.6 g is printed to a tenth of a gram, finer than the guidance step for figures above 10 g, so the interval comes from the printed precision: [91.55, 91.65)."
+    },
+    {
+      "fixture": "eu-plain-yoghurt", "basis": "per_serving", "nutrient": "salt",
+      "lo": "5727/40000", "hi": "6275/40000",
+      "why": "0.12 g per 100 g prints from [0.115, 0.125). A 125 g pot prints from [124.5, 125.5). Scaling gives 0.115 * 1.245 = 5727/40000 and 0.125 * 1.255 = 6275/40000. The equivalent sodium figure is this divided by 2.5."
+    },
+    {
+      "fixture": "us-diet-soda", "basis": "per_serving", "nutrient": "energy_kcal",
+      "lo": "0", "hi": "5",
+      "why": "a printed 0 calories carries the whole below-5 allowance, so a can labelled zero can hold just under 5 kcal"
+    }
+  ]
+}

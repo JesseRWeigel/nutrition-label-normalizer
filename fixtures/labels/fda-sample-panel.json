@@ -1,0 +1,38 @@
+{
+  "name": "FDA sample panel",
+  "format": "US_2016",
+  "provenance": "published-example",
+  "source_note": "The FDA's illustrative sample Nutrition Facts panel used to explain the 2016 rule. Recorded here from the widely reproduced version of that panel rather than fetched from fda.gov during this build, so treat it as an example of the format rather than as a citation. Serving 2/3 cup (55 g), 8 servings per container.",
+  "declared_basis": "per_serving",
+  "serving": {"household": "2/3 cup", "amount": 55, "unit": "g"},
+  "servings_per_container": 8,
+  "net_quantity": {"amount": 440, "unit": "g"},
+  "nutrients": {
+    "energy_kcal": 230,
+    "fat": 8,
+    "saturated_fat": 1,
+    "trans_fat": 0,
+    "cholesterol": 0,
+    "sodium": 160,
+    "carbohydrate": 37,
+    "fiber": 4,
+    "total_sugars": 12,
+    "added_sugars": 10,
+    "protein": 3,
+    "vitamin_d": 2,
+    "calcium": 260,
+    "iron": 8,
+    "potassium": 235
+  },
+  "declared_dv_percent": {
+    "fat": 10,
+    "saturated_fat": 5,
+    "cholesterol": 0,
+    "sodium": 7,
+    "carbohydrate": 13,
+    "fiber": 14,
+    "added_sugars": 20,
+    "vitamin_d": 10,
+    "calcium": 20
+  }
+}

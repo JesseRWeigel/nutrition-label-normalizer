@@ -1,0 +1,22 @@
+{
+  "name": "US peanut butter",
+  "format": "US_2016",
+  "provenance": "typical",
+  "source_note": "Representative values for a US peanut butter. Included because its declared sodium of 140 mg sits exactly on the boundary where the rounding step changes from 5 mg to 10 mg, so its interval is asymmetric.",
+  "declared_basis": "per_serving",
+  "serving": {"household": "2 tbsp", "amount": 32, "unit": "g"},
+  "servings_per_container": 15,
+  "nutrients": {
+    "energy_kcal": 190,
+    "fat": 16,
+    "saturated_fat": 3,
+    "trans_fat": 0,
+    "cholesterol": 0,
+    "sodium": 140,
+    "carbohydrate": 7,
+    "fiber": 2,
+    "total_sugars": 3,
+    "added_sugars": 2,
+    "protein": 7
+  }
+}

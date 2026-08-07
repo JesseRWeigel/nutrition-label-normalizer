@@ -1,0 +1,24 @@
+{
+  "name": "Cereal B, granola",
+  "format": "US_2016",
+  "provenance": "typical",
+  "source_note": "Values representative of a US granola, not transcribed from a specific package. Its 55 g serving against cereal A's 34 g is the whole point of the pairing.",
+  "declared_basis": "per_serving",
+  "serving": {"household": "2/3 cup", "amount": 55, "unit": "g"},
+  "servings_per_container": 8,
+  "net_quantity": {"amount": 440, "unit": "g"},
+  "nutrients": {
+    "energy_kcal": 230,
+    "fat": 8,
+    "saturated_fat": 1,
+    "trans_fat": 0,
+    "cholesterol": 0,
+    "sodium": 160,
+    "carbohydrate": 37,
+    "fiber": 4,
+    "total_sugars": 12,
+    "added_sugars": 10,
+    "protein": 3,
+    "potassium": 235
+  }
+}

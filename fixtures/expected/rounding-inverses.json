@@ -1,0 +1,173 @@
+{
+  "_comment": "Hand-computed inverses of printed declarations. Each entry says what a panel prints and the interval of true values that could have produced it. Worked out from the segment tables in the regulation by hand, not generated from the code, so that a change to the code which breaks the rule shows up here. 'lo' and 'hi' are exact rationals; the upper bound is always exclusive.",
+  "cases": [
+    {
+      "format": "US_2016",
+      "nutrient": "energy_kcal",
+      "declared": 230,
+      "lo": "225",
+      "hi": "235",
+      "why": "above 50 kcal the step is 10, so 225 to 235 all print as 230"
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "energy_kcal",
+      "declared": 50,
+      "lo": "95/2",
+      "hi": "55",
+      "why": "the boundary case. Below 50 the step is 5, giving 47.5 to 50. At and above 50 the step is 10, giving 50 to 55. The interval is asymmetric because the rule changes inside it."
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "energy_kcal",
+      "declared": 45,
+      "lo": "85/2",
+      "hi": "95/2",
+      "why": "wholly below 50, so the step is 5 throughout"
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "energy_kcal",
+      "declared": 0,
+      "lo": "0",
+      "hi": "5",
+      "why": "below 5 calories the content may be expressed as zero, so a printed 0 says only that the true value is under 5"
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "energy_kcal",
+      "declared": 5,
+      "lo": "5/2",
+      "hi": "15/2",
+      "why": "the contrast with the sodium 5 mg case further down this file. The calorie rule says a value below 5 MAY be expressed as zero, so 3 kcal can legally print as either 0 or 5 and the inverse of 5 reaches down to 2.5. The sodium rule says SHALL, so it does not. One word in the regulation, and the interval doubles."
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "fat",
+      "declared": 0,
+      "lo": "0",
+      "hi": "1/2",
+      "why": "the 0 g trans fat case. Anything under 0.5 g prints as zero."
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "fat",
+      "declared": 5,
+      "lo": "19/4",
+      "hi": "11/2",
+      "why": "below 5 g the step is 0.5, giving 4.75 to 5. At and above 5 g the step is 1, giving 5 to 5.5."
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "fat",
+      "declared": 0.5,
+      "lo": "1/2",
+      "hi": "3/4",
+      "why": "asymmetric, and not for the reason it looks. Anything below 0.5 g MUST print as zero, so a printed 0.5 g cannot have come from 0.4 g even though 0.4 is within half a step of it."
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "sodium",
+      "declared": 140,
+      "lo": "275/2",
+      "hi": "145",
+      "why": "the step changes from 5 mg to 10 mg at 140 mg, so the interval runs 2.5 below and 5 above"
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "sodium",
+      "declared": 0,
+      "lo": "0",
+      "hi": "5",
+      "why": "under 5 mg prints as zero"
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "sodium",
+      "declared": 5,
+      "lo": "5",
+      "hi": "15/2",
+      "why": "anything below 5 mg must print as zero, so a printed 5 mg starts at 5 and does not reach down to 2.5"
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "cholesterol",
+      "declared": "<5",
+      "lo": "2",
+      "hi": "5",
+      "why": "the less than 5 mg form is required between 2 and 5 mg, and is strictly more informative than printing 5"
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "cholesterol",
+      "declared": 0,
+      "lo": "0",
+      "hi": "2",
+      "why": "under 2 mg prints as zero"
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "cholesterol",
+      "declared": 5,
+      "lo": "5",
+      "hi": "15/2",
+      "why": "the 2 to 5 mg band must print as the less-than form, so a printed 5 can only come from 5 mg or more"
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "carbohydrate",
+      "declared": 1,
+      "lo": "1/2",
+      "hi": "3/2",
+      "why": "whole gram steps, and the optional less-than-1-gram form does not narrow a printed 1"
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "carbohydrate",
+      "declared": "<1",
+      "lo": "1/2",
+      "hi": "1",
+      "why": "the optional less-than form is narrower than printing 1"
+    },
+    {
+      "format": "US_2016",
+      "nutrient": "protein",
+      "declared": 0,
+      "lo": "0",
+      "hi": "1/2",
+      "why": "under 0.5 g prints as zero"
+    },
+    {
+      "format": "EU_1169",
+      "nutrient": "salt",
+      "declared": 0,
+      "lo": "0",
+      "hi": "1/80",
+      "why": "the EU salt rule prints zero below 0.0125 g"
+    },
+    {
+      "format": "EU_1169",
+      "nutrient": "salt",
+      "declared": 0.12,
+      "lo": "23/200",
+      "hi": "1/8",
+      "why": "0.01 g steps between 0.0125 g and 1 g"
+    },
+    {
+      "format": "EU_1169",
+      "nutrient": "fat",
+      "declared": 3.3,
+      "lo": "13/4",
+      "hi": "67/20",
+      "why": "0.1 g steps between 0.5 g and 10 g"
+    },
+    {
+      "format": "EU_1169",
+      "nutrient": "energy_kj",
+      "declared": 262,
+      "lo": "523/2",
+      "hi": "525/2",
+      "why": "EU energy is declared to the nearest whole kJ"
+    }
+  ]
+}

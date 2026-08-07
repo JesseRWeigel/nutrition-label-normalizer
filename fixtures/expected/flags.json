@@ -1,0 +1,29 @@
+{
+  "_comment": "Which fixtures must raise which flags, and which must raise none. The empty lists are the negative controls and they are the more important half of this file: a checker that flags everything passes any suite built only from broken labels. Codes are the exact Finding.code values, and the test asserts set equality rather than containment, so a new false positive on a correct label fails the suite.",
+  "expected": {
+    "cereal-a-flakes": [],
+    "cereal-b-granola": [],
+    "eu-dark-chocolate": [],
+    "eu-olive-oil": [],
+    "eu-plain-yoghurt": [],
+    "fda-sample-panel": [],
+    "us-crackers-2point5-servings": [],
+    "us-diet-soda": [],
+    "us-peanut-butter": [],
+    "us-pre2016-panel": [],
+    "us-whole-milk": [],
+    "broken-added-sugars": ["added_sugars_exceed_total"],
+    "broken-container-arithmetic": ["container_arithmetic"],
+    "broken-dv-mismatch": ["declared_dv_mismatch"],
+    "broken-energy-mismatch": ["energy_kcal"],
+    "broken-fat-components": ["fat_components"],
+    "broken-mass-budget": ["mass_budget"],
+    "broken-salt-sodium": ["salt_sodium"]
+  },
+  "expected_notes": {
+    "_comment": "Notes that must be present on specific fixtures. A note is not an error, and the tool must still produce it.",
+    "us-pre2016-panel": ["pre_2016_panel"],
+    "eu-olive-oil": ["kj_kcal_ratio"],
+    "fda-sample-panel": ["container_arithmetic", "declared_dv_ok"]
+  }
+}

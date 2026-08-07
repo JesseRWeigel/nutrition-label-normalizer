@@ -1,0 +1,20 @@
+{
+  "name": "EU olive oil",
+  "format": "EU_1169",
+  "provenance": "typical",
+  "source_note": "Representative values for an EU extra virgin olive oil, declared per 100 ml. Included as the clearest case where the declared kJ and kcal figures are not related by 4.184: 91.6 g of fat gives 3389 kJ from the Annex XIV kJ column and 824 kcal from its kcal column, a ratio of 4.112.",
+  "declared_basis": "per_100ml",
+  "serving": {"household": "1 tbsp", "amount": 14, "unit": "ml"},
+  "nutrients": {
+    "energy_kj": 3389,
+    "energy_kcal": 824,
+    "fat": 91.6,
+    "saturated_fat": 13.8,
+    "monounsaturated_fat": 70.3,
+    "polyunsaturated_fat": 7.5,
+    "carbohydrate": 0,
+    "total_sugars": 0,
+    "protein": 0,
+    "salt": 0
+  }
+}

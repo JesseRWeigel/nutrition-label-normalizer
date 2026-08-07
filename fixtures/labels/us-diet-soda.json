@@ -1,0 +1,19 @@
+{
+  "name": "US diet soda",
+  "format": "US_2016",
+  "provenance": "constructed",
+  "source_note": "Built to exercise the zero-declaration segments. Every macronutrient row is 0, and the calorie row uses the below-5-calories allowance, so almost every interval here comes from a zero rather than from a number.",
+  "declared_basis": "per_serving",
+  "serving": {"household": "1 can", "amount": 355, "unit": "ml"},
+  "servings_per_container": 1,
+  "nutrients": {
+    "energy_kcal": 0,
+    "fat": 0,
+    "sodium": 40,
+    "carbohydrate": 0,
+    "total_sugars": 0,
+    "added_sugars": 0,
+    "protein": 0,
+    "potassium": 60
+  }
+}

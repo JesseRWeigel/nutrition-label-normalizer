@@ -1,0 +1,25 @@
+{
+  "name": "BROKEN: sodium percent daily value does not match its amount",
+  "format": "US_2016",
+  "provenance": "constructed",
+  "source_note": "Positive control. 160 mg of sodium is 7 percent of the 2300 mg daily value and the panel prints 25 percent, which is what the same product would have printed if someone had used a 640 mg reference. Every other row matches the granola fixture and is consistent.",
+  "declared_basis": "per_serving",
+  "serving": {"household": "2/3 cup", "amount": 55, "unit": "g"},
+  "servings_per_container": 8,
+  "nutrients": {
+    "energy_kcal": 230,
+    "fat": 8,
+    "saturated_fat": 1,
+    "trans_fat": 0,
+    "cholesterol": 0,
+    "sodium": 160,
+    "carbohydrate": 37,
+    "fiber": 4,
+    "total_sugars": 12,
+    "added_sugars": 10,
+    "protein": 3
+  },
+  "declared_dv_percent": {
+    "sodium": 25
+  }
+}

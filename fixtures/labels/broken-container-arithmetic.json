@@ -1,0 +1,23 @@
+{
+  "name": "BROKEN: net quantity does not match the serving count",
+  "format": "US_2016",
+  "provenance": "constructed",
+  "source_note": "Positive control. Eight servings of 30 g is at most 259 g, and the package declares 500 g net. Every nutrient row here is internally consistent, so only the container check can catch it.",
+  "declared_basis": "per_serving",
+  "serving": {"household": "1 cup", "amount": 30, "unit": "g"},
+  "servings_per_container": 8,
+  "net_quantity": {"amount": 500, "unit": "g"},
+  "nutrients": {
+    "energy_kcal": 120,
+    "fat": 1,
+    "saturated_fat": 0,
+    "trans_fat": 0,
+    "cholesterol": 0,
+    "sodium": 100,
+    "carbohydrate": 25,
+    "fiber": 2,
+    "total_sugars": 6,
+    "added_sugars": 4,
+    "protein": 3
+  }
+}
