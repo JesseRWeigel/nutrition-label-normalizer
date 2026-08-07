@@ -278,6 +278,16 @@ SABOTAGES = [
         "told",
     ),
 
+    (
+        "compare-drops-the-warnings",
+        "nutrilabel/cli.py",
+        "    for warning in seen:\n        print(f\"  note: {warning}\")",
+        "    for warning in []:\n        print(f\"  note: {warning}\")",
+        "the side-by-side view stops carrying the compounding note, so the one place two "
+        "products are weighed against each other is the one place the reader is not told "
+        "the numbers are wider than they look. This is the bug verify.sh found",
+    ),
+
     # ---- reading a panel ------------------------------------------------------------
     (
         "ocr-confidence-gate-removed",

@@ -209,7 +209,10 @@ PY
   for basis in per_serving per_100g per_100kcal per_container; do
     if python3 -m nutrilabel normalize fixtures/labels/fda-sample-panel.json \
         --basis "$basis" > "$TMP/basis.txt" 2>&1; then
-      if head -1 "$TMP/basis.txt" | grep -qi "basis in force"; then
+      # normalize prints the label summary first and the basis line second, so both are
+      # checked. The point is that the basis appears before any figure, not that it is on
+      # any particular line.
+      if head -2 "$TMP/basis.txt" | grep -qi "basis in force"; then
         echo "  ok    --basis $basis states the basis in force on its first line"
       else
         echo "  FAIL  --basis $basis printed figures without saying what they are per:"

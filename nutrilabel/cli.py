@@ -94,6 +94,18 @@ def cmd_compare(args) -> int:
     print(f"BASIS IN FORCE: {' / '.join(sorted(bases))}  ({args.basis})")
     for label, item in zip(labels, normalized):
         print(f"  {label.name}: {item.serving_note}")
+    # The warnings were being dropped here while `normalize` printed them, which put the
+    # compounding note in the one view where it matters least and left it out of the one
+    # where two products are being weighed against each other. Deduplicated across labels,
+    # because "the serving size is itself rounded" said once is a fact about the basis and
+    # said four times is noise.
+    seen: list[str] = []
+    for item in normalized:
+        for warning in item.warnings:
+            if warning not in seen:
+                seen.append(warning)
+    for warning in seen:
+        print(f"  note: {warning}")
     print()
 
     keys: list[str] = []

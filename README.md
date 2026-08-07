@@ -135,10 +135,10 @@ nutrilabel/            the engine, standard library only
   units.py             mass, volume and energy conversion
 fixtures/labels/       19 labels: 12 correct, 7 broken on purpose, each with a provenance
 fixtures/expected/     hand-computed intervals and the flag each broken label must raise
-tests/                 70 unit tests
+tests/                 73 unit tests
 scripts/verify.sh      the nine steps whose combined exit code is the result
 scripts/check_independent.py   recomputes everything by a second implementation
-scripts/sabotage.py    29 deliberate breakages under the three-gate rule
+scripts/sabotage.py    30 deliberate breakages under the three-gate rule
 scripts/privacy_scan.py        credential sweep with a positive control
 scripts/build_page.py  generates docs/index.html from the fixtures
 docs/index.html        the published page, rebuilt and diffed by verify
@@ -158,7 +158,7 @@ again from the regulation, so there is no segment table there to be wrong in the
 the basis conversions come from corner enumeration, which does not know that interval division
 swaps the endpoints and so disagrees if the engine ever forgets.
 
-`scripts/sabotage.py` breaks the engine 29 ways and requires something to notice each time, under
+`scripts/sabotage.py` breaks the engine 30 ways and requires something to notice each time, under
 three gates: the patch must apply, it must change what the tool computes, and only then must a
 check fail. A null control runs first, copying the tree unchanged into another directory and
 requiring an identical fingerprint, because a measurement that tracks where the code lives rather

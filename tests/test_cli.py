@@ -77,6 +77,51 @@ class TestOutputAlwaysStatesTheBasis(unittest.TestCase):
             self.assertIn("citation", value)
 
 
+class TestEveryViewStatesItsBasis(unittest.TestCase):
+    """A figure with no basis printed beside it is the mistake the tool exists to stop.
+
+    Both renderers, all four bases. The basis has to appear before any number, which is
+    why the assertion is on the position of the marker rather than only its presence.
+    """
+
+    BASES = ("per_serving", "per_100g", "per_100kcal", "per_container")
+
+    def test_normalize_names_the_basis_before_any_figure(self):
+        for basis in self.BASES:
+            with self.subTest(basis=basis):
+                code, output = run(["normalize", LABELS / "fda-sample-panel.json",
+                                    "--basis", basis])
+                self.assertEqual(code, 0)
+                # The table header, not a nutrient key: per_100kcal omits the energy row
+                # on purpose, because 100 kcal per 100 kcal is not information.
+                self.assertLess(output.index("BASIS IN FORCE"), output.index("nutrient"))
+
+    def test_compare_names_the_basis_before_any_figure(self):
+        for basis in self.BASES:
+            with self.subTest(basis=basis):
+                code, output = run(["compare", LABELS / "cereal-a-flakes.json",
+                                    LABELS / "cereal-b-granola.json", "--basis", basis])
+                self.assertEqual(code, 0)
+                self.assertLess(output.index("BASIS IN FORCE"), output.index("nutrient"))
+
+    def test_compare_carries_the_compounding_warning_through(self):
+        """compare was dropping the per-label warnings that normalize prints.
+
+        Per container is the basis where the warning matters most, and comparing two
+        products is the moment a reader is most likely to take the numbers at face value.
+        Found by verify.sh, which looked for the warning in compare's output and did not
+        find it.
+        """
+        code, output = run(["compare", LABELS / "cereal-a-flakes.json",
+                            LABELS / "cereal-b-granola.json", "--basis", "per_container"])
+        self.assertEqual(code, 0)
+        self.assertIn("compounds two roundings", output)
+        # And it must not appear on a basis where no compounding happens.
+        _, per_serving = run(["compare", LABELS / "cereal-a-flakes.json",
+                              LABELS / "cereal-b-granola.json", "--basis", "per_serving"])
+        self.assertNotIn("compounds two roundings", per_serving)
+
+
 class TestRulesCommand(unittest.TestCase):
     def test_rules_prints_citations_for_both_formats(self):
         for label_format, marker in (("US_2016", "21 CFR"), ("EU_1169", "EC guidance")):
