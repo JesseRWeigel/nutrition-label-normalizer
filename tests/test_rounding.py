@@ -143,6 +143,35 @@ class TestRuleTableShape(unittest.TestCase):
         with self.assertRaises(ValueError):
             US_RULES["cholesterol"].inverse(3)
 
+    def test_a_gap_in_the_inverse_raises_rather_than_returning_the_hull(self):
+        """A rule whose inverse is two disjoint runs must refuse to merge them.
+
+        Neither shipped rule table can produce this, which is exactly why the case needs
+        building by hand: the guard is dormant on correct input, and a sabotage run
+        found that disabling it changed nothing anywhere in the suite. Returning the
+        hull would quietly include true values that print as something else, and every
+        figure derived from the interval would be too wide with no sign of it.
+
+        The table below permits "less than 9" in two separate places with an ordinary
+        numeric range between them, so the inverse of "<9" is [0, 1) and [5, 6) with a
+        hole in the middle.
+        """
+        from nutrilabel.rounding import Declaration, LessThan, Nearest, RoundingRule, Segment
+
+        split = RoundingRule(
+            "split", "g",
+            (
+                Segment(Fraction(0), Fraction(1), (LessThan(Fraction(9)),)),
+                Segment(Fraction(1), Fraction(5), (Nearest(Fraction(1)),)),
+                Segment(Fraction(5), Fraction(6), (LessThan(Fraction(9)),)),
+                Segment(Fraction(6), None, (Nearest(Fraction(1)),)),
+            ),
+            "a table built for this test only",
+        )
+        with self.assertRaises(ValueError) as caught:
+            split.inverse(Declaration("less_than", Fraction(9)))
+        self.assertIn("contiguous", str(caught.exception))
+
 
 if __name__ == "__main__":
     unittest.main()
