@@ -1,0 +1,14 @@
+This file exists so the privacy scan can prove it is able to see.
+
+scripts/privacy_scan.py appends credential-shaped strings here, runs its whole sweep a
+second time, and requires every planted string to be found. Then it restores the file to
+exactly these bytes. A scanner that reads nothing prints the same "clean" as a scanner
+that read everything and found nothing, and this is the only way to tell the two apart.
+
+Nothing here is a real credential, and nothing complete enough to be one is ever written
+to disk. The planted strings are assembled from fragments at run time so that GitHub's
+push protection has no full pattern to reject, and so that the scanner does not match its
+own pattern list.
+
+If this file is ever left with a line beginning "planted:" in it, the scan crashed between
+writing and restoring. Delete those lines; nothing else in the repository reads this file.
