@@ -47,7 +47,7 @@ and fat carry known energy per gram, so a declared calorie figure is a predictio
 about its own other rows. There is no tolerance constant anywhere in that check. Both sides are
 intervals derived from the rounding rules, and a flag is raised only when no assignment of true
 values consistent with the printed panel could produce the printed energy. That is what keeps the
-negative controls meaningful: eleven of the nineteen fixtures are correct labels that must raise
+negative controls meaningful: twelve of the nineteen fixtures are correct labels that must raise
 nothing, and a checker that flags everything would fail on them.
 
 ## Running it
@@ -146,7 +146,7 @@ docs/index.html        the published page, rebuilt and diffed by verify
 
 ## How this is checked
 
-The fixture corpus is the foundation, and its most important half is the eleven labels that must
+The fixture corpus is the foundation, and its most important half is the twelve labels that must
 raise nothing. A checker built only from broken labels is passed by a function that returns
 "broken" for every input.
 
