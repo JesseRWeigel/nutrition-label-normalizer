@@ -327,7 +327,15 @@ run_readme() {
   # that appears only in pasted output is not a scaffold marker. So the fenced blocks are
   # stripped before the search rather than the markers being excluded, because an exclusion
   # disarms the check exactly where it is most likely to be needed.
-  python3 - README.md > "$TMP/readme-prose.txt" <<'PY'
+  # HELD IN A VARIABLE, NOT WRITTEN TO THE SCRATCH DIRECTORY. This used to redirect into
+  # $TMP/readme-prose.txt and grep the file three times. On 2026-09-04, during a batch that
+  # re-verified a hundred repositories at once, the scratch directory was not there when the
+  # redirect ran, and a repository where nothing was wrong reported a failure with five lines
+  # of "No such file or directory". Nothing in this script removes $TMP after creating it and
+  # the disk was not full; the cause was not found. Keeping the prose in a shell variable means
+  # there is nothing on disk to go missing, which settles it without needing the explanation.
+  local prose
+  prose="$(python3 - README.md <<'PY'
 import sys
 lines = open(sys.argv[1], encoding="utf-8").read().splitlines()
 out, fenced = [], False
@@ -339,12 +347,13 @@ for line in lines:
         out.append(line)
 print("\n".join(out))
 PY
+)"
   local markers=("TO""DO" "FIX""ME" "XX""X" "replace with a real description" "NOT YET VERIFIED")
   local found=0
   for m in "${markers[@]}"; do
-    if grep -qF -- "$m" "$TMP/readme-prose.txt"; then
+    if grep -qF -- "$m" <<<"$prose"; then
       echo "  FAIL  README.md still contains a stub marker outside a code block, at:"
-      grep -nF -- "$m" "$TMP/readme-prose.txt" | head -3
+      grep -nF -- "$m" <<<"$prose" | head -3
       found=1
     fi
   done
