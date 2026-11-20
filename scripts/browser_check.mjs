@@ -73,7 +73,6 @@ class Chrome {
       "--no-default-browser-check",
       "--disable-extensions",
       "--disable-gpu",
-      "--no-sandbox",
       "--allow-file-access-from-files",
       "--hide-scrollbars",
       // Never --disable-crashpad-for-testing or --disable-features=Crashpad. On this
