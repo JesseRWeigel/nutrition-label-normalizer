@@ -104,6 +104,31 @@ class TestEveryViewStatesItsBasis(unittest.TestCase):
                 self.assertEqual(code, 0)
                 self.assertLess(output.index("BASIS IN FORCE"), output.index("nutrient"))
 
+    def test_compare_refuses_a_mix_of_mass_and_volume_per_hundred(self):
+        for extra in ([], ["--json"]):
+            with self.subTest(extra=extra):
+                code, output = run(["compare", LABELS / "cereal-a-flakes.json",
+                                    LABELS / "us-whole-milk.json", "--basis", "per_100g",
+                                    *extra])
+                self.assertEqual(code, 2)
+                self.assertIn("cannot compare per 100 g with per 100 ml", output)
+                self.assertIn("--basis per_100kcal", output)
+                self.assertNotIn("ratios between", output)
+
+    def test_compare_accepts_two_volume_labels_per_hundred(self):
+        code, output = run(["compare", LABELS / "us-whole-milk.json",
+                            LABELS / "us-diet-soda.json", "--basis", "per_100g"])
+        self.assertEqual(code, 0)
+        self.assertIn("per 100 ml", output)
+        self.assertIn("ratios between", output)
+
+    def test_compare_allows_mixed_media_on_an_energy_basis(self):
+        code, output = run(["compare", LABELS / "cereal-a-flakes.json",
+                            LABELS / "us-whole-milk.json", "--basis", "per_100kcal",
+                            "--json"])
+        self.assertEqual(code, 0)
+        self.assertEqual([row["basis"] for row in json.loads(output)], ["per_100kcal"] * 2)
+
     def test_compare_carries_the_compounding_warning_through(self):
         """compare was dropping the per-label warnings that normalize prints.
 

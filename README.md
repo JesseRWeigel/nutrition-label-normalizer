@@ -75,6 +75,10 @@ python3 -m nutrilabel ocr panel.tsv
 python3 -m nutrilabel rules --format EU_1169
 ```
 
+The `per_100g` option uses per 100 ml on labels expressed by volume. The comparison
+command rejects a mix of mass and volume on this basis rather than assuming a density.
+Use `--basis per_100kcal` when both labels provide usable energy values.
+
 `--json` on any of the first four gives machine-readable output, with exact rationals alongside
 the floats so nothing is lost to binary floating point.
 
@@ -137,7 +141,7 @@ nutrilabel/            the engine, standard library only
   units.py             mass, volume and energy conversion
 fixtures/labels/       19 labels: 12 correct, 7 broken on purpose, each with a provenance
 fixtures/expected/     hand-computed intervals and the flag each broken label must raise
-tests/                 73 unit tests
+tests/                 76 unit tests
 scripts/verify.sh      the nine steps whose combined exit code is the result
 scripts/check_independent.py   recomputes everything by a second implementation
 scripts/sabotage.py    30 deliberate breakages under the three-gate rule
