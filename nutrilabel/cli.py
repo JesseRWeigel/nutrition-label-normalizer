@@ -85,6 +85,11 @@ def cmd_compare(args) -> int:
     labels = _load(args.files)
     if len(labels) < 2:
         raise SystemExit("nutrilabel: compare needs at least two labels")
+    if args.basis == "per_100g" and len({label.medium_unit for label in labels}) > 1:
+        raise LabelError(
+            "cannot compare per 100 g with per 100 ml without a density conversion; "
+            "use --basis per_100kcal when both labels provide usable energy values"
+        )
     normalized = [normalize(label, args.basis) for label in labels]
     if args.json:
         print(json.dumps([item.to_json() for item in normalized], indent=2))
